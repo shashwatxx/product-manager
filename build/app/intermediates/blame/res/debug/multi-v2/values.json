@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/shashwat/DEVELOPMENT/FLUTTER_PROJECTS/seekh/first/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/home/shashwat/DEVELOPMENT/FLUTTER_PROJECTS/product manager/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
-                    "source": "/home/shashwat/DEVELOPMENT/FLUTTER_PROJECTS/seekh/first/android/app/src/main/res/values/styles.xml",
+                    "source": "/home/shashwat/DEVELOPMENT/FLUTTER_PROJECTS/product manager/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

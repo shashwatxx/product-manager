@@ -9,7 +9,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.0
   scoped_model: "^0.3.0"
-
+  http: ^0.12.0+2
+  
+  
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -59,3 +62,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies, 
   # see https://flutter.io/custom-fonts/#from-packages
+analyzer:
+  strong-mode: true
+  language:
+    enableSuperMixins: true

@@ -42,7 +42,7 @@ class ProductCard extends StatelessWidget {
         ),
         ScopedModelDescendant<MainModel>(
           builder: (BuildContext context, Widget child, MainModel model) {
-            bool icontaker = model.products[productIndex].isFavorite;
+            bool icontaker = model.allproducts[productIndex].isFavorite;
             print("icontaker-" + "$icontaker");
             return IconButton(
               icon: Icon(
@@ -67,6 +67,7 @@ class ProductCard extends StatelessWidget {
           Image.asset(product.image),
           _buildTitlePriceRow(),
           AddressTag('Union Square, San Francisco'),
+          Text(product.userEmail),
           _buildActionButtons(context)
         ],
       ),
