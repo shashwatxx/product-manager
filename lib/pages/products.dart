@@ -5,7 +5,23 @@ import 'package:scoped_model/scoped_model.dart';
 import '../widgets/products/products.dart';
 import '../scoped-models/main.dart';
 
-class ProductsPage extends StatelessWidget {
+class ProductsPage extends StatefulWidget {
+  final MainModel model;
+  ProductsPage(this.model);
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _ProductPageState();
+  }
+}
+
+class _ProductPageState extends State<ProductsPage> {
+  @override
+  initState() {
+    widget.model.fetchProducts();
+    super.initState();
+  }
+
   Widget _buildSideDrawer(BuildContext context) {
     return Drawer(
       child: Column(
@@ -26,12 +42,37 @@ class ProductsPage extends StatelessWidget {
     );
   }
 
+  Widget _buildProductsList() {
+    return ScopedModelDescendant(
+      builder: (BuildContext context, Widget child, MainModel model) {
+        Widget content = Center(
+          child: Text("NO PRODUCTS FOUND"),
+        );
+        if (model.displayedProducts.length > 0 && !model.isLoading) {
+          content = Products();
+        } else if (model.isLoading) {
+          content = Center(
+              child: CircularProgressIndicator(
+            backgroundColor: Colors.black,
+            semanticsLabel: "LOADING",
+            semanticsValue: "100%",
+            strokeWidth: 2.0,
+          ));
+        }
+        return content;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: _buildSideDrawer(context),
       appBar: AppBar(
-        title: Text('EasyList',style: TextStyle(fontFamily: 'Oswald'),),
+        title: Text(
+          'EasyList',
+          style: TextStyle(fontFamily: 'Oswald'),
+        ),
         actions: <Widget>[
           ScopedModelDescendant<MainModel>(
             builder: (BuildContext context, Widget child, MainModel model) {
@@ -47,7 +88,7 @@ class ProductsPage extends StatelessWidget {
           )
         ],
       ),
-      body: Products(),
+      body: _buildProductsList(),
     );
   }
 }
