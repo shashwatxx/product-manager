@@ -52,14 +52,15 @@ class _ProductPageState extends State<ProductsPage> {
           content = Products();
         } else if (model.isLoading) {
           content = Center(
-              child: CircularProgressIndicator(
-            backgroundColor: Colors.black,
+              child: RefreshProgressIndicator(
             semanticsLabel: "LOADING",
             semanticsValue: "100%",
-            strokeWidth: 2.0,
           ));
         }
-        return content;
+        return RefreshIndicator(
+          onRefresh: model.fetchProducts,
+          child: content,
+        );
       },
     );
   }
