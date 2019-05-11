@@ -7,7 +7,7 @@ import '../models/userdef.dart';
 
 class ConnectedProductsModel extends Model {
   List<Product> _products = [];
-  int _selProductIndex;
+  String _selProductId;
   User _authenticatedUser;
   bool _isLoading = false;
   Future<Null> addProduct(
@@ -61,15 +61,25 @@ class ProductsModel extends ConnectedProductsModel {
     return List.from(_products);
   }
 
-  int get selectedProductIndex {
-    return _selProductIndex;
+  String get selectedProductId {
+    return _selProductId;
   }
 
+
+int get selectedProductIndex{
+
+  return final int selectedProductId = _products.indexWhere((Product product) {
+      return product.id == _selProductId;
+    });
+}
+
   Product get selectedProduct {
-    if (selectedProductIndex == null) {
+    if (selectedProductId == null) {
       return null;
     }
-    return _products[selectedProductIndex];
+    return _products.firstWhere((Product product) {
+      return product.id == _selProductId;
+    });
   }
 
   bool get displayFavoritesOnly {
@@ -103,7 +113,10 @@ class ProductsModel extends ConnectedProductsModel {
           price: price,
           userEmail: selectedProduct.userEmail,
           userId: selectedProduct.userId);
-      _products[selectedProductIndex] = updatedProduct;
+      final int selectedProductId = _products.indexWhere((Product product) {
+        return product.id == _selProductId;
+      });
+      _products[selectedProductId] = updatedProduct;
 
       notifyListeners();
     });
@@ -112,8 +125,9 @@ class ProductsModel extends ConnectedProductsModel {
   void deleteProduct() {
     _isLoading = true;
     final deletedProductId = selectedProduct.id;
-    _products.removeAt(selectedProductIndex);
-    _selProductIndex = null;
+    
+    _products.removeAt(selectedProductId);
+    _selProductId = null;
     notifyListeners();
     http
         .delete(
@@ -163,6 +177,7 @@ class ProductsModel extends ConnectedProductsModel {
     final bool isCurrentlyFavorite = selectedProduct.isFavorite;
     final bool newFavoriteStatus = !isCurrentlyFavorite;
     final Product updatedProduct = Product(
+        id: selectedProduct.id,
         title: selectedProduct.title,
         description: selectedProduct.description,
         price: selectedProduct.price,
@@ -175,12 +190,12 @@ class ProductsModel extends ConnectedProductsModel {
     notifyListeners();
   }
 
-  void selectProduct(int index) {
+  void selectProduct(String productId) {
     //  _selProductId = productId;
     //   if (productId != null) {
     //     notifyListeners();
 
-    _selProductIndex = index;
+    _selProductId = productId;
     if (_selProductIndex != null) {
       notifyListeners();
     }
