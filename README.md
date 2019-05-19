@@ -1,16 +1,10 @@
 # Product Manager
 
-A new Flutter project.
+A Flutter project.
 
-## Getting Started
+A firebase server App which let you add/delete/upadate your product list
+with proper user management ,MAPs and Device camera access .
 
-This project is a starting point for a Flutter application.
+more features are to be added....
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+project status-Ongoing
